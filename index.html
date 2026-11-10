@@ -153,7 +153,7 @@
       text-align: center;
     }
 
-    /* حاوية المحادثة (Chat Container) */
+    /* حاوية المحادثة */
     .chat-container {
       flex: 1;
       width: 100%;
@@ -235,7 +235,7 @@
     .send-btn:hover { background-color: #f97316; }
     .send-btn svg { width: 20px; height: 20px; fill: #fff; transform: rotate(180deg); }
 
-    /* النوافذ المنبثقة (Modals) */
+    /* النوافذ المنبثقة */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -277,7 +277,6 @@
     .modal-card button.submit-btn:hover { background: #ea580c; }
     .modal-card .close-btn { background: transparent; color: #71717a; border: none; cursor: pointer; font-size: 12px; text-align: center; }
 
-    /* العلامة المائية */
     .watermark-nc {
       position: fixed;
       bottom: 8px;
@@ -316,16 +315,16 @@
     Zen<span class="o-orange">o</span> AI
   </div>
 
-  <!-- قسم الإخبارك الصوتي (الكرة النيون) -->
+  <!-- قسم الكرة النيون الصوتية -->
   <div class="zeno-ai-section">
     <div class="orb" id="aiOrb" onclick="startZenoListening()" title="اضغط وتحدث صوتياً مع Zeno"></div>
     <div class="ai-status-text" id="aiStatus">اضغط على الكرة وتحدث صوتياً...</div>
   </div>
 
-  <!-- صندوق المحادثة الرئيسي -->
+  <!-- صندوق المحادثة -->
   <div class="chat-container">
     <div class="chat-messages" id="chat-messages">
-      <div class="message assistant">أهلاً بك! أنا Zeno AI، مساعدك الذكي. يمكنك كتابة سؤالك في الأسفل أو التحدث إلي صوتياً عبر الكرة الزرقاء. كيف يمكنني مساعدتك اليوم؟</div>
+      <div class="message assistant">أهلاً بك! أنا Zeno AI، مساعدك الذكي المطور حصرياً من قِبل استوديو NC. كيف يمكنني مساعدتك اليوم؟</div>
     </div>
     
     <div class="chat-input-container">
@@ -336,7 +335,7 @@
     </div>
   </div>
 
-  <!-- نوافذ تسجيل الدخول والحسابات -->
+  <!-- نوافذ الحسابات -->
   <div class="modal-overlay" id="login-modal">
     <div class="modal-card">
       <h3>تسجيل الدخول - Zeno</h3>
@@ -358,7 +357,7 @@
     </div>
   </div>
 
-  <div class="watermark-nc">Made Zeno Ai in NC Studio©</div>
+  <div class="watermark-nc">From NC©</div>
 
   <script>
     // التحقق من الحساب عند التحميل
@@ -388,7 +387,6 @@
     document.getElementById('login-close').onclick = () => { loginModal.style.display = 'none'; };
     document.getElementById('signup-close').onclick = () => { signupModal.style.display = 'none'; };
 
-    // تسجيل الحسابات وسقوبيس
     document.getElementById('signup-submit').onclick = async () => {
       let username = document.getElementById('signup-username').value.trim();
       let accountName = document.getElementById('signup-accountname').value.trim() || username;
@@ -441,7 +439,7 @@
     }
 
     // -------------------------------------------------------------
-    // نظام المحادثة والذكاء الاصطناعي (Groq AI Chat + Voice)
+    // النظام الذكي والاتصال الآمن بخادم Vercel الوسيط (/api/chat)
     // -------------------------------------------------------------
     const chatMessages = document.getElementById('chat-messages');
     const userInput = document.getElementById('user-input');
@@ -478,11 +476,11 @@
       aiStatus.innerText = "Zeno يفكر في الإجابة...";
 
       try {
-        const apiEndpoint = window.location.hostname === 'localhost' ? 'http://localhost:3000/api/chat' : '/api/chat';
-
-        const response = await fetch(apiEndpoint, {
+        const response = await fetch("/api/chat", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({ messages: conversationMessages })
         });
 
@@ -505,7 +503,7 @@
 
       } catch (err) {
         console.error(err);
-        aiStatus.innerText = "فشل الاتصال بخادم الذكاء الاصطناعي!";
+        aiStatus.innerText = "فشل الاتصال بالخادم!";
       }
     }
 
